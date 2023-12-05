@@ -12,9 +12,11 @@ namespace TaskLify
 {
     public partial class FormHome : Form
     {
-        public FormHome()
+        private readonly string username;
+        public FormHome(string username)
         {
             InitializeComponent();
+            this.username = username;
         }
         private void FormHome_Load(object sender, EventArgs e)
         {
@@ -53,6 +55,20 @@ namespace TaskLify
             }
         }
 
+        public static void ShowFormInPanel(Form form, Panel panel)
+        {
+            form.TopLevel = false;
+            form.FormBorderStyle = FormBorderStyle.None;
+            form.Dock = DockStyle.Fill;
+            panel.Controls.Clear();
+            panel.Controls.Add(form);
+            form.Show();
+        }
+        public void ReloadFormTodo()
+        {
+            openChildForm(new FormTodo(username));
+        }
+
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             openChildForm(new FormDashboard());
@@ -60,7 +76,7 @@ namespace TaskLify
 
         private void btnAll_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormTodo());
+            openChildForm(new FormTodo(username));
         }
     }
 }

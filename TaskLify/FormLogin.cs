@@ -24,7 +24,7 @@ namespace TaskLify
         {
             if (ValidateAccount(txtUsername.Text, txtPassword.Text))
             {
-                var home = new FormHome();
+                var home = new FormHome(txtUsername.Text);
                 home.Show();
                 this.Hide();
             }

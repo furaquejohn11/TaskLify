@@ -36,7 +36,6 @@ namespace TaskLify
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
@@ -69,6 +68,7 @@ namespace TaskLify
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add Task";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // lblPage
             // 
@@ -104,22 +104,11 @@ namespace TaskLify
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(57, 133);
+            this.label2.Location = new System.Drawing.Point(38, 129);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(128, 24);
+            this.label2.Size = new System.Drawing.Size(76, 24);
             this.label2.TabIndex = 8;
-            this.label2.Text = "Finished Task";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(729, 147);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(129, 24);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "Ongoing Task";
+            this.label2.Text = "All Task";
             // 
             // FormTodo
             // 
@@ -131,10 +120,10 @@ namespace TaskLify
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormTodo";
             this.Text = "FormTodo";
+            this.Load += new System.EventHandler(this.FormTodo_Load);
             this.pnlTop.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
@@ -152,6 +141,5 @@ namespace TaskLify
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
     }
 }

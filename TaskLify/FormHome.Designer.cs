@@ -32,13 +32,13 @@ namespace TaskLify
             this.pnlBody = new System.Windows.Forms.Panel();
             this.pnlSide = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.btnMissed = new System.Windows.Forms.Button();
             this.btnOngoing = new System.Windows.Forms.Button();
             this.btnFinished = new System.Windows.Forms.Button();
             this.btnAll = new System.Windows.Forms.Button();
             this.btnDashboard = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblUsername = new System.Windows.Forms.Label();
-            this.btnMissed = new System.Windows.Forms.Button();
             this.pnlSide.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -76,6 +76,20 @@ namespace TaskLify
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(182, 240);
             this.panel2.TabIndex = 2;
+            // 
+            // btnMissed
+            // 
+            this.btnMissed.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnMissed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMissed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMissed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(124)))), ((int)(((byte)(233)))));
+            this.btnMissed.Location = new System.Drawing.Point(0, 172);
+            this.btnMissed.Name = "btnMissed";
+            this.btnMissed.Size = new System.Drawing.Size(182, 43);
+            this.btnMissed.TabIndex = 4;
+            this.btnMissed.Text = "Missed";
+            this.btnMissed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMissed.UseVisualStyleBackColor = true;
             // 
             // btnOngoing
             // 
@@ -155,20 +169,6 @@ namespace TaskLify
             this.lblUsername.TabIndex = 0;
             this.lblUsername.Text = "Username";
             // 
-            // btnMissed
-            // 
-            this.btnMissed.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnMissed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnMissed.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMissed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(8)))), ((int)(((byte)(124)))), ((int)(((byte)(233)))));
-            this.btnMissed.Location = new System.Drawing.Point(0, 172);
-            this.btnMissed.Name = "btnMissed";
-            this.btnMissed.Size = new System.Drawing.Size(182, 43);
-            this.btnMissed.TabIndex = 4;
-            this.btnMissed.Text = "Missed";
-            this.btnMissed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnMissed.UseVisualStyleBackColor = true;
-            // 
             // FormHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,8 +190,6 @@ namespace TaskLify
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel pnlBody;
         private System.Windows.Forms.Panel pnlSide;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnMissed;
@@ -201,5 +199,6 @@ namespace TaskLify
         private System.Windows.Forms.Button btnDashboard;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lblUsername;
+        public System.Windows.Forms.Panel pnlBody;
     }
 }

@@ -8,30 +8,103 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.Data.SQLite;
+using TaskLify.Models;
+
 namespace TaskLify
 {
     public partial class FormTodo : Form
     {
-        public FormTodo()
+        private const string connectionString = "Data Source = database.sqlite3";
+        private List<TaskModel> taskList = new List<TaskModel>();
+
+
+        private readonly string username;
+        public FormTodo(string username)
         {
             InitializeComponent();
 
             //TaskModel t = new TaskModel();
-           // TaskController taskController = new TaskController(username);
+            // TaskController taskController = new TaskController(username);
             //foreach (var task in taskController.tasks)
             //{
             //    GenerateTaskBlocks(task.title, task.details);
-           // }
+            // }
+
+            this.username = username;
+        }
+        private void FormTodo_Load(object sender, EventArgs e)
+        {
+            LoadTask();
+        }
+        private void LoadTask()
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM tblTask WHERE username = @username";
+                    
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                while (reader.Read())
+                                {
+                                    TaskModel taskModel = new TaskModel()
+                                    {
+                                        title = reader["taskTitle"].ToString(),
+                                        details = reader["taskDetails"].ToString()
+                                    };
+                                    taskList.Add(taskModel);
+                                }
+                            }
+                            else
+                            {
+                                TaskModel taskModel = new TaskModel()
+                                {
+                                    title = "Title",
+                                    details = " Details"
+                                };
+                                taskList.Add(taskModel);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message);
+            }
+            finally
+            {
+                LoadTaskList();
+            }
+            
+        }
+        private void LoadTaskList()
+        {
+            foreach (var tasks in taskList)
+            {
+                GenerateTaskBlocks(tasks.title, tasks.details);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             GenerateTaskBlocks();
         }
-        static int count = 1;
+        
         private void GenerateTaskBlocks(string title = "Title ", string details = "details")
         {
-            string t = title + count++.ToString();
+            //string t = title + count++.ToString();
             Panel panel = new Panel()
             {
                 Size = new Size(181, 189),
@@ -42,7 +115,7 @@ namespace TaskLify
             Label titleLabel = new Label()
             {
                 //Text = "Title " + x++.ToString(),
-                Text = t ,
+                Text = title ,
                 Location = new Point(4, 10),
                 ForeColor = Color.White,
                 Font = new Font("Microsoft Sans Serif", 12)
@@ -88,7 +161,7 @@ namespace TaskLify
             {
                 var displayTask = new FormDisplayTask()
                 {
-                    title = t
+                    title = title
                 };
                 displayTask.ShowDialog();
             }
@@ -105,5 +178,13 @@ namespace TaskLify
                 DisplayInfo();
             };
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            var addTask = new FormAddTask(username);
+            addTask.ShowDialog();
+        }
+
+       
     }
 }

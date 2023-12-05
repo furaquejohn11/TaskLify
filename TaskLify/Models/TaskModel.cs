@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace TaskLify.Models
 {
-    class TaskModel
+    public class TaskModel
     {
+        public string id { get; set; }
+        public string title { get; set; }
+        public string details { get; set; }
+        public TaskModel()
+        {
+
+        }
     }
 }
