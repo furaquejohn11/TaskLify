@@ -118,6 +118,7 @@ namespace TaskLify
             this.btnAll.Text = "All";
             this.btnAll.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAll.UseVisualStyleBackColor = true;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
             // btnDashboard
             // 
@@ -132,6 +133,7 @@ namespace TaskLify
             this.btnDashboard.Text = "Dashboard";
             this.btnDashboard.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnDashboard.UseVisualStyleBackColor = true;
+            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // panel1
             // 
@@ -178,6 +180,7 @@ namespace TaskLify
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormHome";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormHome_FormClosing);
+            this.Load += new System.EventHandler(this.FormHome_Load);
             this.pnlSide.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

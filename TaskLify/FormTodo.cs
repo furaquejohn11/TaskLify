@@ -28,9 +28,10 @@ namespace TaskLify
         {
             GenerateTaskBlocks();
         }
+        static int count = 1;
         private void GenerateTaskBlocks(string title = "Title ", string details = "details")
         {
-
+            string t = title + count++.ToString();
             Panel panel = new Panel()
             {
                 Size = new Size(181, 189),
@@ -41,7 +42,7 @@ namespace TaskLify
             Label titleLabel = new Label()
             {
                 //Text = "Title " + x++.ToString(),
-                Text = title,
+                Text = t ,
                 Location = new Point(4, 10),
                 ForeColor = Color.White,
                 Font = new Font("Microsoft Sans Serif", 12)
@@ -55,7 +56,7 @@ namespace TaskLify
                 ForeColor = Color.White,
                 Font = new Font("Microsoft Sans Serif", 10)
             };
-            Button btnEdit = new Button()
+            /*Button btnEdit = new Button()
             {
                 Text = "Ewan",
                 Location = new Point(4, 163),
@@ -74,18 +75,35 @@ namespace TaskLify
                 Font = new Font("Microsoft Sans Serif", 8)
 
             };
-
-            btnView.Click += (btnSender, btnE) =>
-            {
-                MessageBox.Show(titleLabel.Text);
-            };
-
-
+            */
+            
             flowLayoutPanel1.Controls.Add(panel);
             panel.Controls.Add(titleLabel);
             panel.Controls.Add(detailsLabel);
-            panel.Controls.Add(btnEdit);
-            panel.Controls.Add(btnView);
+            //panel.Controls.Add(btnEdit);
+            //panel.Controls.Add(btnView);
+
+            
+            void DisplayInfo()
+            {
+                var displayTask = new FormDisplayTask()
+                {
+                    title = t
+                };
+                displayTask.ShowDialog();
+            }
+            panel.Click += (btnSender, btnE) =>
+            {
+                DisplayInfo();
+            };
+            titleLabel.Click += (btnSender, btnE) =>
+            {
+                DisplayInfo();
+            };
+            detailsLabel.Click += (btnSender, btnE) =>
+            {
+                DisplayInfo();
+            };
         }
     }
 }

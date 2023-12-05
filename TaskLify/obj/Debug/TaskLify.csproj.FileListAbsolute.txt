@@ -20,3 +20,4 @@ C:\Users\Admin\source\repos\TaskLify\TaskLify\obj\Debug\TaskLify.csproj.CoreComp
 C:\Users\Admin\source\repos\TaskLify\TaskLify\obj\Debug\TaskLify.csproj.CopyComplete
 C:\Users\Admin\source\repos\TaskLify\TaskLify\obj\Debug\TaskLify.exe
 C:\Users\Admin\source\repos\TaskLify\TaskLify\obj\Debug\TaskLify.pdb
+C:\Users\Admin\source\repos\TaskLify\TaskLify\obj\Debug\TaskLify.FormDisplayTask.resources

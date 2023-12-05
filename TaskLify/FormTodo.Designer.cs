@@ -86,14 +86,14 @@ namespace TaskLify
             this.flowLayoutPanel1.AutoScroll = true;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(29, 191);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(720, 424);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(765, 424);
             this.flowLayoutPanel1.TabIndex = 10;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(783, 223);
+            this.button1.Location = new System.Drawing.Point(757, 510);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 60);
             this.button1.TabIndex = 9;
             this.button1.Text = "TestAdd";
             this.button1.UseVisualStyleBackColor = true;
@@ -127,9 +127,9 @@ namespace TaskLify
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(50)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(882, 621);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
