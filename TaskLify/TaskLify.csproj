@@ -83,6 +83,12 @@
     <Compile Include="FormDisplayTask.Designer.cs">
       <DependentUpon>FormDisplayTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormFinished.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormFinished.Designer.cs">
+      <DependentUpon>FormFinished.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,6 +118,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormDisplayTask.resx">
       <DependentUpon>FormDisplayTask.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormFinished.resx">
+      <DependentUpon>FormFinished.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormHome.resx">
       <DependentUpon>FormHome.cs</DependentUpon>

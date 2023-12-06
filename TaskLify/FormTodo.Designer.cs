@@ -34,8 +34,6 @@ namespace TaskLify
             this.btnAdd = new System.Windows.Forms.Button();
             this.lblPage = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
             this.pnlTop.SuspendLayout();
             this.panel6.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +50,7 @@ namespace TaskLify
             // 
             // panel6
             // 
-            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(43)))), ((int)(((byte)(64)))));
+            this.panel6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(54)))));
             this.panel6.Controls.Add(this.btnAdd);
             this.panel6.Controls.Add(this.lblPage);
             this.panel6.Location = new System.Drawing.Point(12, 15);
@@ -84,31 +82,10 @@ namespace TaskLify
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(29, 191);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 111);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(765, 424);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(858, 504);
             this.flowLayoutPanel1.TabIndex = 10;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(757, 510);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 60);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "TestAdd";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(38, 129);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 24);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "All Task";
             // 
             // FormTodo
             // 
@@ -116,10 +93,8 @@ namespace TaskLify
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(50)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(882, 621);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormTodo";
             this.Text = "FormTodo";
@@ -128,7 +103,6 @@ namespace TaskLify
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -139,7 +113,5 @@ namespace TaskLify
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label lblPage;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
     }
 }
