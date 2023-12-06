@@ -53,27 +53,32 @@ namespace TaskLify
 
                         using (var reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
-                            {
+                            
                                 while (reader.Read())
                                 {
                                     TaskModel taskModel = new TaskModel()
                                     {
                                         title = reader["taskTitle"].ToString(),
+                                        date = reader["taskDate"].ToString(),
+                                        status = reader["taskStatus"].ToString(),
                                         details = reader["taskDetails"].ToString()
                                     };
                                     taskList.Add(taskModel);
                                 }
-                            }
+                            
+                            /*
                             else
                             {
                                 TaskModel taskModel = new TaskModel()
                                 {
                                     title = "Title",
+                                    date = DateTime.Now.ToString("MM/dd/yyyy HH:mm"),
+                                    status = "N/A",
                                     details = " Details"
                                 };
                                 taskList.Add(taskModel);
                             }
+                            */
                         }
                     }
                 }
@@ -93,16 +98,12 @@ namespace TaskLify
         {
             foreach (var tasks in taskList)
             {
-                GenerateTaskBlocks(tasks.title, tasks.details);
+                GenerateTaskBlocks(tasks);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            GenerateTaskBlocks();
-        }
         
-        private void GenerateTaskBlocks(string title = "Title ", string details = "details")
+        private void GenerateTaskBlocks(TaskModel tasks)
         {
             //string t = title + count++.ToString();
 
@@ -145,7 +146,7 @@ namespace TaskLify
 
             Label titleLabel = new Label()
             {
-                Text = title,
+                Text = tasks.title,
                 Location = new Point(3, 5),
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI Semibold", 14.25f, FontStyle.Bold)
@@ -153,7 +154,7 @@ namespace TaskLify
 
             Label dateLabel = new Label()
             {
-                Text = "10/15/2024",
+                Text = tasks.date,
                 Location = new Point(3, 30),
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 9.75f)
@@ -161,7 +162,7 @@ namespace TaskLify
 
             Label statusLabel = new Label()
             {
-                Text = "Ongoing",
+                Text = tasks.status,
                 Location = new Point(151, 5),
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 8),
@@ -170,7 +171,7 @@ namespace TaskLify
 
             Label detailsLabel = new Label()
             {
-                Text = details,
+                Text = tasks.details,
                 //Location = new Point(5, 5),
                 AutoSize = false,
                 Dock = DockStyle.Fill,
@@ -196,7 +197,7 @@ namespace TaskLify
             {
                 var displayTask = new FormDisplayTask()
                 {
-                    title = title
+                    title = tasks.title
                 };
                 displayTask.ShowDialog();
             }

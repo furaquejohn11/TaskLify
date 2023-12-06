@@ -10,7 +10,10 @@ namespace TaskLify.Models
     {
         public string id { get; set; }
         public string title { get; set; }
+        public string date { get; set; }
+        public string status { get; set; }
         public string details { get; set; }
+        
         public TaskModel()
         {
 

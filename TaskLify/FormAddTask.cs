@@ -39,12 +39,15 @@ namespace TaskLify
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO tblTask (username, taskTitle, taskDetails) VALUES (@username, @taskTitle, @taskDetails)";
+                    string query = "INSERT INTO tblTask (username, taskTitle,taskDate,taskStatus, taskDetails) " +
+                        "VALUES (@username, @taskTitle, @taskDate, @taskStatus, @taskDetails)";
 
                     using (var command = new SQLiteCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@username", username);
                         command.Parameters.AddWithValue("@taskTitle", txtTitle.Text);
+                        command.Parameters.AddWithValue("@taskDate", dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+                        command.Parameters.AddWithValue("@taskStatus", "Ongoing");
                         command.Parameters.AddWithValue("@taskDetails", txtDetails.Text);
 
                         command.ExecuteNonQuery();
