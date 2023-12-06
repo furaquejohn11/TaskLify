@@ -8,19 +8,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using TaskLify.Models;
+using System.Data.SQLite;
+
 namespace TaskLify
 {
     public partial class FormDisplayTask : Form
     {
-        public string title { get; set; }
-        public FormDisplayTask()
+        private readonly string username;
+        public TaskModel tasks { get; set; }
+        public FormDisplayTask(string username)
         {
             InitializeComponent();
+            this.username = username;
         }
 
         private void FormDisplayTask_Load(object sender, EventArgs e)
         {
-            label1.Text = title;
+            LoadTaskInfo();
+        }
+        private void LoadTaskInfo()
+        {
+            txtTitle.Text = tasks.title;
+            txtDeadline.Text = tasks.date;
+            txtDetails.Text = tasks.details;
         }
     }
 }

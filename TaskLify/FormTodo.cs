@@ -164,7 +164,7 @@ namespace TaskLify
             {
                 Text = tasks.status,
                 Location = new Point(151, 5),
-                ForeColor = Color.White,
+                ForeColor = SetStatusColor(tasks.status),
                 Font = new Font("Segoe UI", 8),
                 
             };
@@ -178,6 +178,7 @@ namespace TaskLify
                 ForeColor = Color.White,
                 Font = new Font("Segoe UI", 8)
             };
+            
 
             flowLayoutPanel1.Controls.Add(panel);
             panel.Controls.Add(tableLayoutPanel);
@@ -189,32 +190,41 @@ namespace TaskLify
             mainPanel.Controls.Add(detailsLabel);
 
 
-            //panel.Controls.Add(btnEdit);
-            //panel.Controls.Add(btnView);
+            
 
-
+            // Displaying details of tasks
             void DisplayInfo()
             {
-                var displayTask = new FormDisplayTask()
+                var displayTask = new FormDisplayTask(username)
                 {
-                    title = tasks.title
+                    tasks = tasks
                 };
                 displayTask.ShowDialog();
             }
-            panel.Click += (btnSender, btnE) =>
-            {
-                DisplayInfo();
-            };
-            titleLabel.Click += (btnSender, btnE) =>
-            {
-                DisplayInfo();
-            };
-            detailsLabel.Click += (btnSender, btnE) =>
-            {
-                DisplayInfo();
-            };
-        }
+            panel.Click += (btnSender, btnE) =>  DisplayInfo();
+            tableLayoutPanel.Click += (btnSender, btnE) => DisplayInfo();
+            topPanel.Click += (btnSender, btnE) => DisplayInfo();
+            titleLabel.Click += (btnSender, btnE) => DisplayInfo();
+            mainPanel.Click += (btnSender, btnE) => DisplayInfo();
+            detailsLabel.Click += (btnSender, btnE) => DisplayInfo();
+            dateLabel.Click += (btnSender, btnE) => DisplayInfo();
+            statusLabel.Click += (btnSender, btnE) => DisplayInfo();
 
+        }
+        private Color SetStatusColor(string title)
+        {
+            switch (title)
+            {
+                case "Ongoing":
+                    return Color.White;
+                case "Finished":
+                    return Color.Green;
+                case "Missed":
+                    return Color.Red;
+                default:
+                    return Color.Yellow;
+            }
+        }
         private void btnAdd_Click(object sender, EventArgs e)
         {
             var addTask = new FormAddTask(username);
