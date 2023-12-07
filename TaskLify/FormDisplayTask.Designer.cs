@@ -34,9 +34,10 @@ namespace TaskLify
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtDeadline = new System.Windows.Forms.Label();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.btnSaveDone = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.btnDelCancel = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtTitle
@@ -44,7 +45,7 @@ namespace TaskLify
             this.txtTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitle.Location = new System.Drawing.Point(103, 30);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(213, 29);
+            this.txtTitle.Size = new System.Drawing.Size(439, 29);
             this.txtTitle.TabIndex = 0;
             // 
             // txtDetails
@@ -89,14 +90,15 @@ namespace TaskLify
             this.txtDeadline.TabIndex = 4;
             this.txtDeadline.Text = "Deadline: ";
             // 
-            // btnSave
+            // btnSaveDone
             // 
-            this.btnSave.Location = new System.Drawing.Point(435, 458);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(107, 23);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.Text = "Save Changes";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSaveDone.Location = new System.Drawing.Point(435, 438);
+            this.btnSaveDone.Name = "btnSaveDone";
+            this.btnSaveDone.Size = new System.Drawing.Size(107, 37);
+            this.btnSaveDone.TabIndex = 5;
+            this.btnSaveDone.Text = "MARK AS DONE";
+            this.btnSaveDone.UseVisualStyleBackColor = true;
+            this.btnSaveDone.Click += new System.EventHandler(this.btnSaveDone_Click);
             // 
             // label3
             // 
@@ -105,22 +107,29 @@ namespace TaskLify
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(41, 103);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 20);
+            this.label3.Size = new System.Drawing.Size(63, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "Set Status: ";
+            this.label3.Text = "Details: ";
             // 
-            // comboBox1
+            // btnDelCancel
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Ongoing",
-            "Finished",
-            "Missed"});
-            this.comboBox1.Location = new System.Drawing.Point(138, 103);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
+            this.btnDelCancel.Location = new System.Drawing.Point(322, 438);
+            this.btnDelCancel.Name = "btnDelCancel";
+            this.btnDelCancel.Size = new System.Drawing.Size(107, 37);
+            this.btnDelCancel.TabIndex = 7;
+            this.btnDelCancel.Text = "DELETE";
+            this.btnDelCancel.UseVisualStyleBackColor = true;
+            this.btnDelCancel.Click += new System.EventHandler(this.btnDelCancel_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(209, 438);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(107, 37);
+            this.btnEdit.TabIndex = 8;
+            this.btnEdit.Text = "EDIT";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // FormDisplayTask
             // 
@@ -128,9 +137,10 @@ namespace TaskLify
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(50)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(588, 503);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.btnEdit);
+            this.Controls.Add(this.btnDelCancel);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.btnSaveDone);
             this.Controls.Add(this.txtDeadline);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -140,6 +150,7 @@ namespace TaskLify
             this.Name = "FormDisplayTask";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDisplayTask";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormDisplayTask_FormClosing);
             this.Load += new System.EventHandler(this.FormDisplayTask_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -153,8 +164,9 @@ namespace TaskLify
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label txtDeadline;
-        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnSaveDone;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button btnDelCancel;
+        private System.Windows.Forms.Button btnEdit;
     }
 }

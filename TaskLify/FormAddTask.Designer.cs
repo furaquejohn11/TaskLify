@@ -52,10 +52,10 @@ namespace TaskLify
             // txtTitle
             // 
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(82, 28);
+            this.txtTitle.Location = new System.Drawing.Point(108, 28);
             this.txtTitle.MaxLength = 15;
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(355, 31);
+            this.txtTitle.Size = new System.Drawing.Size(318, 31);
             this.txtTitle.TabIndex = 10;
             // 
             // label1
@@ -83,11 +83,11 @@ namespace TaskLify
             // txtDetails
             // 
             this.txtDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDetails.Location = new System.Drawing.Point(71, 190);
-            this.txtDetails.MaxLength = 30;
+            this.txtDetails.Location = new System.Drawing.Point(103, 146);
+            this.txtDetails.MaxLength = 260;
             this.txtDetails.Multiline = true;
             this.txtDetails.Name = "txtDetails";
-            this.txtDetails.Size = new System.Drawing.Size(355, 183);
+            this.txtDetails.Size = new System.Drawing.Size(323, 228);
             this.txtDetails.TabIndex = 13;
             // 
             // dateTimePicker1
@@ -99,7 +99,7 @@ namespace TaskLify
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(197, 406);
+            this.btnAdd.Location = new System.Drawing.Point(224, 399);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 15;

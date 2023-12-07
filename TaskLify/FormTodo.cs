@@ -58,6 +58,7 @@ namespace TaskLify
                                 {
                                     TaskModel taskModel = new TaskModel()
                                     {
+                                        id = Convert.ToInt32(reader["taskId"]),
                                         title = reader["taskTitle"].ToString(),
                                         date = reader["taskDate"].ToString(),
                                         status = reader["taskStatus"].ToString(),

@@ -62,6 +62,12 @@ namespace TaskLify
             }
             finally
             {
+                var home = Application.OpenForms.OfType<FormHome>().FirstOrDefault();
+
+                if (home != null)
+                {
+                    home.ReloadFormTodo();
+                }
                 this.Close();
             }
             
@@ -69,12 +75,7 @@ namespace TaskLify
 
         private void FormAddTask_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var home = Application.OpenForms.OfType<FormHome>().FirstOrDefault();
-
-            if (home != null)
-            {
-                home.ReloadFormTodo();
-            }
+           
         }
     }
 }
