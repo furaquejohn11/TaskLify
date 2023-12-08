@@ -66,7 +66,19 @@ namespace TaskLify
         }
         public void ReloadFormTodo()
         {
-            openChildForm(new FormTodo(username));
+            openChildForm(new FormTodo(username, "ALL"));
+        }
+        public void ReloadFormFinished()
+        {
+            openChildForm(new FormTodo(username, "FINISHED"));
+        }
+        public void ReloadFormOngoing()
+        {
+            openChildForm(new FormTodo(username, "ONGOING"));
+        }
+        public void ReloadFormMissed()
+        {
+            openChildForm(new FormTodo(username, "MISSED"));
         }
 
         private void btnDashboard_Click(object sender, EventArgs e)
@@ -76,7 +88,22 @@ namespace TaskLify
 
         private void btnAll_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormTodo(username));
+            openChildForm(new FormTodo(username, "ALL"));
+        }
+
+        private void btnFinished_Click(object sender, EventArgs e)
+        {
+            openChildForm(new FormTodo(username, "FINISHED"));
+        }
+
+        private void btnOngoing_Click(object sender, EventArgs e)
+        {
+            openChildForm(new FormTodo(username, "ONGOING"));
+        }
+
+        private void btnMissed_Click(object sender, EventArgs e)
+        {
+            openChildForm(new FormTodo(username, "MISSED"));
         }
     }
 }

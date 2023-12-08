@@ -21,7 +21,8 @@ namespace TaskLify
 
 
         private readonly string username;
-        public FormTodo(string username)
+        private string selectedMenu;
+        public FormTodo(string username, string selectedMenu)
         {
             InitializeComponent();
 
@@ -33,10 +34,27 @@ namespace TaskLify
             // }
 
             this.username = username;
+            this.selectedMenu = selectedMenu;
         }
         private void FormTodo_Load(object sender, EventArgs e)
         {
             LoadTask();
+        }
+        private string SetQuery()
+        {
+            switch(selectedMenu)
+            {
+                case "ALL":
+                    return "SELECT * FROM tblTask WHERE username = @username";
+                case "FINISHED":
+                    return "SELECT * FROM tblTask WHERE username = @username AND taskStatus = 'Finished'";
+                case "ONGOING":
+                    return "SELECT * FROM tblTask WHERE username = @username AND taskStatus = 'Ongoing'";
+                case "MISSED":
+                    return "SELECT * FROM tblTask WHERE username = @username AND taskStatus = 'Missed'";
+                default:
+                    return "SELECT * FROM tblTask WHERE username = @username";
+            }
         }
         private void LoadTask()
         {
@@ -46,7 +64,7 @@ namespace TaskLify
                 {
                     connection.Open();
 
-                    string query = "SELECT * FROM tblTask WHERE username = @username";
+                    string query = SetQuery();
                     
                     using (var command = new SQLiteCommand(query, connection))
                     {
@@ -233,12 +251,11 @@ namespace TaskLify
             mainPanel.Controls.Add(detailsLabel);
 
 
-            
-
+         
             // Displaying details of tasks
             void DisplayInfo()
             {
-                var displayTask = new FormDisplayTask(username)
+                var displayTask = new FormDisplayTask(username, selectedMenu)
                 {
                     tasks = tasks
                 };
@@ -270,7 +287,7 @@ namespace TaskLify
         }
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            var addTask = new FormAddTask(username);
+            var addTask = new FormAddTask(username,selectedMenu);
             addTask.ShowDialog();
         }
 

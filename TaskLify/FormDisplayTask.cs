@@ -21,12 +21,14 @@ namespace TaskLify
 
 
         private bool isView = true;
+        private string selectedMenu;
         public TaskModel tasks { get; set; }
 
-        public FormDisplayTask(string username)
+        public FormDisplayTask(string username, string selectedMenu)
         {
             InitializeComponent();
             this.username = username;
+            this.selectedMenu = selectedMenu;
         }
 
         private void FormDisplayTask_Load(object sender, EventArgs e)
@@ -215,7 +217,24 @@ namespace TaskLify
 
             if (home != null)
             {
-                home.ReloadFormTodo();
+                switch (selectedMenu)
+                {
+                    case "ALL":
+                        home.ReloadFormTodo();
+                        break;
+                    case "FINISHED":
+                        home.ReloadFormFinished();
+                        break;
+                    case "ONGOING":
+                        home.ReloadFormOngoing();
+                        break;
+                    case "MISSED":
+                        home.ReloadFormMissed();
+                        break;
+                    default:
+                        home.ReloadFormTodo();
+                        break;
+                }
             }
         }
 

@@ -21,10 +21,12 @@ namespace TaskLify
         private List<TaskModel> taskList = new List<TaskModel>();
 
         private readonly string username;
-        public FormAddTask(string username)
+        private string selectedMenu;
+        public FormAddTask(string username, string selectedMenu)
         {
             InitializeComponent();
             this.username = username;
+            this.selectedMenu = selectedMenu;
         }
 
         private void FormAddTask_Load(object sender, EventArgs e)
@@ -68,7 +70,24 @@ namespace TaskLify
 
                 if (home != null)
                 {
-                    home.ReloadFormTodo();
+                    switch (selectedMenu)
+                    {
+                        case "ALL":
+                            home.ReloadFormTodo();
+                            break;
+                        case "FINISHED":
+                            home.ReloadFormFinished();
+                            break;
+                        case "ONGOING":
+                            home.ReloadFormOngoing();
+                            break;
+                        case "MISSED":
+                            home.ReloadFormMissed();
+                            break;
+                        default:
+                            home.ReloadFormTodo();
+                            break;
+                    }
                 }
                 this.Close();
             }
@@ -79,7 +98,6 @@ namespace TaskLify
             var deadline = DateTime.ParseExact(date, "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
 
             TimeSpan difference = deadline - DateTime.Now.Date;
-            MessageBox.Show(difference.TotalDays.ToString());
 
             return (difference.TotalDays >= 0) ? "Ongoing" : "Missed";
         }

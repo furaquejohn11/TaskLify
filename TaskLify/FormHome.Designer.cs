@@ -90,6 +90,7 @@ namespace TaskLify
             this.btnMissed.Text = "Missed";
             this.btnMissed.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnMissed.UseVisualStyleBackColor = true;
+            this.btnMissed.Click += new System.EventHandler(this.btnMissed_Click);
             // 
             // btnOngoing
             // 
@@ -104,6 +105,7 @@ namespace TaskLify
             this.btnOngoing.Text = "Ongoing";
             this.btnOngoing.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOngoing.UseVisualStyleBackColor = true;
+            this.btnOngoing.Click += new System.EventHandler(this.btnOngoing_Click);
             // 
             // btnFinished
             // 
@@ -118,6 +120,7 @@ namespace TaskLify
             this.btnFinished.Text = "Finished";
             this.btnFinished.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFinished.UseVisualStyleBackColor = true;
+            this.btnFinished.Click += new System.EventHandler(this.btnFinished_Click);
             // 
             // btnAll
             // 
