@@ -21,11 +21,23 @@ namespace TaskLify
         private void FormHome_Load(object sender, EventArgs e)
         {
             openChildForm(new FormDashboard());
+            ButtonBg(btnDashboard);
         }
 
         private void FormHome_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void ButtonBg(Button btn)
+        {     
+            btnDashboard.BackColor = Color.FromArgb(25, 31, 54);
+            btnAll.BackColor = Color.FromArgb(25, 31, 54);
+            btnFinished.BackColor = Color.FromArgb(25, 31, 54);
+            btnOngoing.BackColor = Color.FromArgb(25, 31, 54);
+            btnMissed.BackColor = Color.FromArgb(25, 31, 54);
+
+            btn.BackColor = Color.SkyBlue;
         }
         public static Form currentForm = null;
         /// <summary>
@@ -84,26 +96,31 @@ namespace TaskLify
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             openChildForm(new FormDashboard());
+            ButtonBg(btnDashboard);
         }
 
         private void btnAll_Click(object sender, EventArgs e)
         {
             openChildForm(new FormTodo(username, "ALL"));
+            ButtonBg(btnAll);
         }
 
         private void btnFinished_Click(object sender, EventArgs e)
         {
             openChildForm(new FormTodo(username, "FINISHED"));
+            ButtonBg(btnFinished);
         }
 
         private void btnOngoing_Click(object sender, EventArgs e)
         {
             openChildForm(new FormTodo(username, "ONGOING"));
+            ButtonBg(btnOngoing);
         }
 
         private void btnMissed_Click(object sender, EventArgs e)
         {
             openChildForm(new FormTodo(username, "MISSED"));
+            ButtonBg(btnMissed);
         }
     }
 }
