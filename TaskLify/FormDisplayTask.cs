@@ -60,15 +60,78 @@ namespace TaskLify
         {
             btnEdit.Visible = true;
             btnDelCancel.Text = "DELETE";
-            btnSaveDone.Text = "MARK AS DONE";
-            btnSaveDone.Enabled = (tasks.status == "Finished") ? false : true;      
+            btnSaveDone.Text = (tasks.status == "Finished") ? "MARK AS UNDONE" : "MARK AS DONE";
+            //btnSaveDone.Enabled = (tasks.status == "Finished") ? false : true;
+            btnEdit.Enabled = (tasks.status == "Finished") ? false : true;
             txtTitle.Enabled = false;
             txtDetails.Enabled = false;
             dateTimePicker1.Enabled = false;
         }
+        private void MarkDone()
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "UPDATE tblTask SET taskStatus =  @taskStatus " +
+                        "WHERE username = @username AND taskId = @id";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@id", tasks.id);
+                        command.Parameters.AddWithValue("@taskStatus", "Finished");
+
+                        //MessageBox.Show(command.CommandText);
+
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+        private void MarkUndone()
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "UPDATE tblTask SET taskStatus =  @taskStatus " +
+                        "WHERE username = @username AND taskId = @id";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        string date = dateTimePicker1.Value.ToString("MM/dd/yyyy");
+
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@id", tasks.id);
+                        command.Parameters.AddWithValue("@taskStatus", CheckIfMissed(date));
+
+                        //MessageBox.Show(command.CommandText);
+
+                        command.ExecuteNonQuery();
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
         private void EditMode()
         {
-            btnSaveDone.Enabled = true;
+            //btnSaveDone.Enabled = true;
             btnEdit.Visible = false;
             btnDelCancel.Text = "CANCEL";
             btnSaveDone.Text = "SAVE CHANGES";
@@ -106,8 +169,16 @@ namespace TaskLify
         {
             if (isView)
             {
-                MarkDone();
-                MessageBox.Show("Task Completed");
+                if (btnSaveDone.Text == "MARK AS DONE")
+                {
+                    MarkDone();
+                    MessageBox.Show("Task Completed");
+                }
+                else if (btnSaveDone.Text == "MARK AS UNDONE")
+                {
+                    MarkUndone();
+                    MessageBox.Show("Task Undone");
+                }
             }
             else
             {
@@ -128,16 +199,19 @@ namespace TaskLify
                 {
                     connection.Open();
 
-                    string query = "UPDATE tblTask SET taskTitle = @taskTitle, taskDate = @taskDate, taskDetails = @taskDetails " +
+                    string query = "UPDATE tblTask SET taskTitle = @taskTitle, taskDate = @taskDate, taskDetails = @taskDetails, taskStatus = @taskStatus " +
                         "WHERE username = @username AND taskId = @id";
 
                     using (var command = new SQLiteCommand(query,connection))
                     {
+                        string date = dateTimePicker1.Value.ToString("MM/dd/yyyy");
+
                         command.Parameters.AddWithValue("@username", username);
                         command.Parameters.AddWithValue("@id", tasks.id);
                         command.Parameters.AddWithValue("@taskTitle", txtTitle.Text);
+                        command.Parameters.AddWithValue("@taskStatus", CheckIfMissed(date));
                         command.Parameters.AddWithValue("@taskDetails", txtDetails.Text);
-                        command.Parameters.AddWithValue("@taskDate", dateTimePicker1.Value.ToString("MM/dd/yyyy"));
+                        command.Parameters.AddWithValue("@taskDate", date);
 
                         //MessageBox.Show(command.CommandText);
 
@@ -152,6 +226,15 @@ namespace TaskLify
                 
             }
         }
+        private string CheckIfMissed(string date)
+        {
+            var deadline = DateTime.ParseExact(date, "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
+
+            TimeSpan difference = deadline - DateTime.Now.Date;
+
+            return (difference.TotalDays >= 0) ? "Ongoing" : "Missed";
+        }
+
         private void DeleteTask()
         {
             try
@@ -180,36 +263,7 @@ namespace TaskLify
             }
         }
 
-        private void MarkDone()
-        {
-            try
-            {
-                using (var connection = new SQLiteConnection(connectionString))
-                {
-                    connection.Open();
-
-                    string query = "UPDATE tblTask SET taskStatus =  @taskStatus " +
-                        "WHERE username = @username AND taskId = @id";
-
-                    using (var command = new SQLiteCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@username", username);
-                        command.Parameters.AddWithValue("@id", tasks.id);
-                        command.Parameters.AddWithValue("@taskStatus", "Finished");
-
-                        //MessageBox.Show(command.CommandText);
-
-                        command.ExecuteNonQuery();
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-
-            }
-        }
+        
 
         private void FormDisplayTask_FormClosing(object sender, FormClosingEventArgs e)
         {
