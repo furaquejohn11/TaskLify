@@ -10,6 +10,7 @@ using System.Windows.Forms;
 
 using TaskLify.Models;
 using System.Data.SQLite;
+using System.Globalization;
 
 namespace TaskLify
 {
@@ -36,8 +37,12 @@ namespace TaskLify
         private void LoadTaskInfo()
         {
             txtTitle.Text = tasks.title;
-            txtDeadline.Text = tasks.date;
+
+            var dateTime = DateTime.ParseExact(tasks.date, "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
+            dateTimePicker1.Value = dateTime;
+
             txtDetails.Text = tasks.details;
+           
         }
  
         private void LoadMode()
@@ -54,16 +59,20 @@ namespace TaskLify
             btnEdit.Visible = true;
             btnDelCancel.Text = "DELETE";
             btnSaveDone.Text = "MARK AS DONE";
+            btnSaveDone.Enabled = (tasks.status == "Finished") ? false : true;      
             txtTitle.Enabled = false;
             txtDetails.Enabled = false;
+            dateTimePicker1.Enabled = false;
         }
         private void EditMode()
         {
+            btnSaveDone.Enabled = true;
             btnEdit.Visible = false;
             btnDelCancel.Text = "CANCEL";
             btnSaveDone.Text = "SAVE CHANGES";
             txtTitle.Enabled = true;
             txtDetails.Enabled = true;
+            dateTimePicker1.Enabled = true;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -95,7 +104,8 @@ namespace TaskLify
         {
             if (isView)
             {
-                MessageBox.Show("Mark as done");
+                MarkDone();
+                MessageBox.Show("Task Completed");
             }
             else
             {
@@ -116,7 +126,7 @@ namespace TaskLify
                 {
                     connection.Open();
 
-                    string query = "UPDATE tblTask SET taskTitle = @taskTitle, taskDetails = @taskDetails " +
+                    string query = "UPDATE tblTask SET taskTitle = @taskTitle, taskDate = @taskDate, taskDetails = @taskDetails " +
                         "WHERE username = @username AND taskId = @id";
 
                     using (var command = new SQLiteCommand(query,connection))
@@ -125,6 +135,7 @@ namespace TaskLify
                         command.Parameters.AddWithValue("@id", tasks.id);
                         command.Parameters.AddWithValue("@taskTitle", txtTitle.Text);
                         command.Parameters.AddWithValue("@taskDetails", txtDetails.Text);
+                        command.Parameters.AddWithValue("@taskDate", dateTimePicker1.Value.ToString("MM/dd/yyyy"));
 
                         //MessageBox.Show(command.CommandText);
 
@@ -157,6 +168,37 @@ namespace TaskLify
                         //MessageBox.Show(command.CommandText);
 
                         command.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
+        }
+
+        private void MarkDone()
+        {
+            try
+            {
+                using (var connection = new SQLiteConnection(connectionString))
+                {
+                    connection.Open();
+
+                    string query = "UPDATE tblTask SET taskStatus =  @taskStatus " +
+                        "WHERE username = @username AND taskId = @id";
+
+                    using (var command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@username", username);
+                        command.Parameters.AddWithValue("@id", tasks.id);
+                        command.Parameters.AddWithValue("@taskStatus", "Finished");
+
+                        //MessageBox.Show(command.CommandText);
+
+                        command.ExecuteNonQuery();
+
                     }
                 }
             }

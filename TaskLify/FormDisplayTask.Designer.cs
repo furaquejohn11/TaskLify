@@ -33,13 +33,13 @@ namespace TaskLify
             this.txtDetails = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtDeadline = new System.Windows.Forms.Label();
             this.btnSaveDone = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnDelCancel = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
             this.btnRedo = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // txtTitle
@@ -81,17 +81,6 @@ namespace TaskLify
             this.label2.Size = new System.Drawing.Size(78, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Deadline: ";
-            // 
-            // txtDeadline
-            // 
-            this.txtDeadline.AutoSize = true;
-            this.txtDeadline.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDeadline.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.txtDeadline.Location = new System.Drawing.Point(134, 96);
-            this.txtDeadline.Name = "txtDeadline";
-            this.txtDeadline.Size = new System.Drawing.Size(78, 20);
-            this.txtDeadline.TabIndex = 4;
-            this.txtDeadline.Text = "Deadline: ";
             // 
             // btnSaveDone
             // 
@@ -154,19 +143,27 @@ namespace TaskLify
             this.btnRedo.UseVisualStyleBackColor = true;
             this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
             // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.CustomFormat = "";
+            this.dateTimePicker1.Location = new System.Drawing.Point(125, 95);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
+            this.dateTimePicker1.TabIndex = 11;
+            // 
             // FormDisplayTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(50)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(588, 503);
+            this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnRedo);
             this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnDelCancel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnSaveDone);
-            this.Controls.Add(this.txtDeadline);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtDetails);
@@ -188,12 +185,12 @@ namespace TaskLify
         private System.Windows.Forms.TextBox txtDetails;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label txtDeadline;
         private System.Windows.Forms.Button btnSaveDone;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnDelCancel;
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

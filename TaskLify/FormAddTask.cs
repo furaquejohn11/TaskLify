@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 
 using System.Data.SQLite;
@@ -44,10 +45,11 @@ namespace TaskLify
 
                     using (var command = new SQLiteCommand(query, connection))
                     {
+                        string deadline = dateTimePicker1.Value.ToString("MM/dd/yyyy");
                         command.Parameters.AddWithValue("@username", username);
                         command.Parameters.AddWithValue("@taskTitle", txtTitle.Text);
-                        command.Parameters.AddWithValue("@taskDate", dateTimePicker1.Value.ToString("MM/dd/yyyy"));
-                        command.Parameters.AddWithValue("@taskStatus", "Ongoing");
+                        command.Parameters.AddWithValue("@taskDate", deadline);
+                        command.Parameters.AddWithValue("@taskStatus", CheckIfMissed(deadline));
                         command.Parameters.AddWithValue("@taskDetails", txtDetails.Text);
 
                         command.ExecuteNonQuery();
@@ -71,6 +73,15 @@ namespace TaskLify
                 this.Close();
             }
             
+        }
+        private string CheckIfMissed(string date)
+        {
+            var deadline = DateTime.ParseExact(date, "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
+
+            TimeSpan difference = deadline - DateTime.Now.Date;
+            MessageBox.Show(difference.TotalDays.ToString());
+
+            return (difference.TotalDays >= 0) ? "Ongoing" : "Missed";
         }
 
         private void FormAddTask_FormClosing(object sender, FormClosingEventArgs e)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 using System.Data.SQLite;
 using TaskLify.Models;
@@ -54,18 +55,24 @@ namespace TaskLify
                         using (var reader = command.ExecuteReader())
                         {
                             
-                                while (reader.Read())
+                            while (reader.Read())
+                            {
+                                if (IsMissed(reader["taskDate"].ToString()) && 
+                                    reader["taskStatus"].ToString() != "Finished")
                                 {
-                                    TaskModel taskModel = new TaskModel()
-                                    {
-                                        id = Convert.ToInt32(reader["taskId"]),
-                                        title = reader["taskTitle"].ToString(),
-                                        date = reader["taskDate"].ToString(),
-                                        status = reader["taskStatus"].ToString(),
-                                        details = reader["taskDetails"].ToString()
-                                    };
-                                    taskList.Add(taskModel);
+                                    UpdateMissedTask(Convert.ToInt32(reader["taskId"]), connection);
                                 }
+
+                                TaskModel taskModel = new TaskModel()
+                                {
+                                    id = Convert.ToInt32(reader["taskId"]),
+                                    title = reader["taskTitle"].ToString(),
+                                    date = reader["taskDate"].ToString(),
+                                    status = reader["taskStatus"].ToString(),
+                                    details = reader["taskDetails"].ToString()
+                                };
+                                taskList.Add(taskModel);
+                            }
                             
                             /*
                             else
@@ -94,6 +101,41 @@ namespace TaskLify
                 LoadTaskList();
             }
             
+        }
+        private bool IsMissed(string date)
+        {
+            var deadline = DateTime.ParseExact(date, "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
+
+            TimeSpan difference = deadline - DateTime.Now.Date;
+            return difference.TotalDays < 0;
+        }
+
+        private void UpdateMissedTask(int id, SQLiteConnection connection)
+        {
+            try
+            {
+               
+                string query = "UPDATE tblTask SET taskStatus =  @taskStatus " +
+                    "WHERE username = @username AND taskId = @id";
+
+                using (var command = new SQLiteCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@taskStatus", "Missed");
+
+                    //MessageBox.Show(command.CommandText);
+
+                    command.ExecuteNonQuery();
+
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+            }
         }
         private void LoadTaskList()
         {
