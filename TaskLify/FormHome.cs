@@ -20,7 +20,7 @@ namespace TaskLify
         }
         private void FormHome_Load(object sender, EventArgs e)
         {
-            openChildForm(new FormDashboard());
+            openChildForm(new FormDashboard(username));
             ButtonBg(btnDashboard);
         }
 
@@ -95,7 +95,7 @@ namespace TaskLify
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            openChildForm(new FormDashboard());
+            openChildForm(new FormDashboard(username));
             ButtonBg(btnDashboard);
         }
 

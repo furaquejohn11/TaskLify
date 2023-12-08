@@ -34,8 +34,19 @@ namespace TaskLify
 
         }
 
+        private bool CheckValues()
+        {
+            return String.IsNullOrEmpty(txtTitle.Text) || String.IsNullOrEmpty(txtDetails.Text);
+        }
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            if (CheckValues())
+            {
+                MessageBox.Show("Fill empty text boxes!");
+                return;
+            }
+
             try
             {
                 using (var connection = new SQLiteConnection(connectionString))
@@ -106,5 +117,43 @@ namespace TaskLify
         {
            
         }
+
+        private Stack<string> undoStack = new Stack<string>();
+        private Stack<string> redoStack = new Stack<string>();
+
+        private void txtDetails_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Push the current state onto the undo stack
+            undoStack.Push(txtDetails.Text);
+
+            // Clear the redo stack since we're starting a new change
+            redoStack.Clear();
+        }
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            if (undoStack.Count > 1)
+            {
+                // Pop the current state from undo stack and push onto redo stack
+                redoStack.Push(undoStack.Pop());
+
+                // Set the TextBox text to the previous state
+                txtDetails.Text = undoStack.Peek();
+            }
+        }
+
+        private void btnRedo_Click(object sender, EventArgs e)
+        {
+            if (redoStack.Count > 0)
+            {
+                // Pop the top of the redo stack and push onto undo stack
+                undoStack.Push(redoStack.Pop());
+
+                // Set the TextBox text to the redo state
+                txtDetails.Text = undoStack.Peek();
+            }
+        }
+
+        
     }
 }

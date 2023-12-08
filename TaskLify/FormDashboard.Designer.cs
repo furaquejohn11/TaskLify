@@ -29,6 +29,9 @@ namespace TaskLify
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -42,6 +45,10 @@ namespace TaskLify
             this.pnlTop = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
             this.lblPage = new System.Windows.Forms.Label();
+            this.txtFinish = new System.Windows.Forms.Label();
+            this.txtMissed = new System.Windows.Forms.Label();
+            this.txtReminders = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -49,11 +56,13 @@ namespace TaskLify
             this.panel5.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.panel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(54)))));
+            this.panel1.Controls.Add(this.txtFinish);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 123);
             this.panel1.Name = "panel1";
@@ -74,6 +83,7 @@ namespace TaskLify
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(54)))));
+            this.panel3.Controls.Add(this.txtReminders);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Location = new System.Drawing.Point(587, 123);
             this.panel3.Name = "panel3";
@@ -87,9 +97,9 @@ namespace TaskLify
             this.label3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label3.Location = new System.Drawing.Point(3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 24);
+            this.label3.Size = new System.Drawing.Size(84, 24);
             this.label3.TabIndex = 2;
-            this.label3.Text = "Reminders";
+            this.label3.Text = "Ongoing";
             // 
             // label2
             // 
@@ -105,6 +115,7 @@ namespace TaskLify
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(54)))));
+            this.panel4.Controls.Add(this.chart1);
             this.panel4.Controls.Add(this.label5);
             this.panel4.Location = new System.Drawing.Point(12, 316);
             this.panel4.Name = "panel4";
@@ -125,6 +136,7 @@ namespace TaskLify
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(33)))), ((int)(((byte)(54)))));
+            this.panel2.Controls.Add(this.txtMissed);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Location = new System.Drawing.Point(312, 123);
             this.panel2.Name = "panel2";
@@ -147,9 +159,9 @@ namespace TaskLify
             this.label4.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label4.Location = new System.Drawing.Point(3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 24);
+            this.label4.Size = new System.Drawing.Size(102, 24);
             this.label4.TabIndex = 0;
-            this.label4.Text = "No Idea";
+            this.label4.Text = "Reminders";
             // 
             // pnlTop
             // 
@@ -181,6 +193,70 @@ namespace TaskLify
             this.lblPage.TabIndex = 0;
             this.lblPage.Text = "Dashboard";
             // 
+            // txtFinish
+            // 
+            this.txtFinish.AutoSize = true;
+            this.txtFinish.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFinish.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(154)))), ((int)(((byte)(253)))));
+            this.txtFinish.Location = new System.Drawing.Point(114, 75);
+            this.txtFinish.Name = "txtFinish";
+            this.txtFinish.Size = new System.Drawing.Size(26, 29);
+            this.txtFinish.TabIndex = 1;
+            this.txtFinish.Text = "0";
+            // 
+            // txtMissed
+            // 
+            this.txtMissed.AutoSize = true;
+            this.txtMissed.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMissed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(154)))), ((int)(((byte)(253)))));
+            this.txtMissed.Location = new System.Drawing.Point(113, 75);
+            this.txtMissed.Name = "txtMissed";
+            this.txtMissed.Size = new System.Drawing.Size(26, 29);
+            this.txtMissed.TabIndex = 2;
+            this.txtMissed.Text = "0";
+            // 
+            // txtReminders
+            // 
+            this.txtReminders.AutoSize = true;
+            this.txtReminders.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtReminders.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(154)))), ((int)(((byte)(253)))));
+            this.txtReminders.Location = new System.Drawing.Point(114, 75);
+            this.txtReminders.Name = "txtReminders";
+            this.txtReminders.Size = new System.Drawing.Size(26, 29);
+            this.txtReminders.TabIndex = 3;
+            this.txtReminders.Text = "0";
+            // 
+            // chart1
+            // 
+            this.chart1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.Area3DStyle.Enable3D = true;
+            chartArea1.Area3DStyle.PointDepth = 50;
+            chartArea1.Area3DStyle.PointGapDepth = 5;
+            chartArea1.BackColor = System.Drawing.Color.Transparent;
+            chartArea1.Name = "ChartArea1";
+            chartArea1.Position.Auto = false;
+            chartArea1.Position.Height = 99F;
+            chartArea1.Position.Width = 80F;
+            chartArea1.Position.X = 2F;
+            chartArea1.Position.Y = 1F;
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.BackColor = System.Drawing.Color.Transparent;
+            legend1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(154)))), ((int)(((byte)(253)))));
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(7, 27);
+            this.chart1.Name = "chart1";
+            series1.BackSecondaryColor = System.Drawing.Color.Transparent;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series1.LabelBackColor = System.Drawing.Color.Transparent;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(277, 266);
+            this.chart1.TabIndex = 1;
+            this.chart1.Text = "chart1";
+            // 
             // FormDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -196,6 +272,7 @@ namespace TaskLify
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FormDashboard";
             this.Text = "FormDashboard";
+            this.Load += new System.EventHandler(this.FormDashboard_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -209,6 +286,7 @@ namespace TaskLify
             this.pnlTop.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -228,5 +306,9 @@ namespace TaskLify
         private System.Windows.Forms.Panel pnlTop;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label lblPage;
+        private System.Windows.Forms.Label txtFinish;
+        private System.Windows.Forms.Label txtReminders;
+        private System.Windows.Forms.Label txtMissed;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }

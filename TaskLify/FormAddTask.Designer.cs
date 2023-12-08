@@ -36,6 +36,8 @@ namespace TaskLify
             this.txtDetails = new System.Windows.Forms.TextBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.btnRedo = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label2
@@ -43,7 +45,7 @@ namespace TaskLify
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(12, 32);
+            this.label2.Location = new System.Drawing.Point(12, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 24);
             this.label2.TabIndex = 9;
@@ -52,7 +54,7 @@ namespace TaskLify
             // txtTitle
             // 
             this.txtTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitle.Location = new System.Drawing.Point(108, 28);
+            this.txtTitle.Location = new System.Drawing.Point(108, 65);
             this.txtTitle.MaxLength = 15;
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(318, 31);
@@ -63,7 +65,7 @@ namespace TaskLify
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 83);
+            this.label1.Location = new System.Drawing.Point(12, 120);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 24);
             this.label1.TabIndex = 11;
@@ -74,7 +76,7 @@ namespace TaskLify
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(12, 146);
+            this.label3.Location = new System.Drawing.Point(12, 183);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(70, 24);
             this.label3.TabIndex = 12;
@@ -83,23 +85,24 @@ namespace TaskLify
             // txtDetails
             // 
             this.txtDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDetails.Location = new System.Drawing.Point(103, 146);
+            this.txtDetails.Location = new System.Drawing.Point(103, 183);
             this.txtDetails.MaxLength = 260;
             this.txtDetails.Multiline = true;
             this.txtDetails.Name = "txtDetails";
             this.txtDetails.Size = new System.Drawing.Size(323, 228);
             this.txtDetails.TabIndex = 13;
+            this.txtDetails.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDetails_KeyPress);
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(108, 87);
+            this.dateTimePicker1.Location = new System.Drawing.Point(108, 124);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 14;
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(224, 399);
+            this.btnAdd.Location = new System.Drawing.Point(224, 436);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 15;
@@ -107,12 +110,34 @@ namespace TaskLify
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // btnRedo
+            // 
+            this.btnRedo.Location = new System.Drawing.Point(383, 8);
+            this.btnRedo.Name = "btnRedo";
+            this.btnRedo.Size = new System.Drawing.Size(75, 23);
+            this.btnRedo.TabIndex = 17;
+            this.btnRedo.Text = "Redo";
+            this.btnRedo.UseVisualStyleBackColor = true;
+            this.btnRedo.Click += new System.EventHandler(this.btnRedo_Click);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Location = new System.Drawing.Point(302, 8);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(75, 23);
+            this.btnUndo.TabIndex = 16;
+            this.btnUndo.Text = "Undo";
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            // 
             // FormAddTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(50)))), ((int)(((byte)(72)))));
             this.ClientSize = new System.Drawing.Size(470, 504);
+            this.Controls.Add(this.btnRedo);
+            this.Controls.Add(this.btnUndo);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.txtDetails);
@@ -140,5 +165,7 @@ namespace TaskLify
         private System.Windows.Forms.TextBox txtDetails;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnRedo;
+        private System.Windows.Forms.Button btnUndo;
     }
 }

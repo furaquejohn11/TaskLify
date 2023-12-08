@@ -66,6 +66,9 @@ namespace TaskLify
             txtTitle.Enabled = false;
             txtDetails.Enabled = false;
             dateTimePicker1.Enabled = false;
+
+            btnUndo.Visible = false;
+            btnRedo.Visible = false;
         }
         private void MarkDone()
         {
@@ -138,6 +141,9 @@ namespace TaskLify
             txtTitle.Enabled = true;
             txtDetails.Enabled = true;
             dateTimePicker1.Enabled = true;
+
+            btnUndo.Visible = true;
+            btnRedo.Visible = true;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -191,8 +197,18 @@ namespace TaskLify
             this.Close();
 
         }
+        private bool CheckValues()
+        {
+            return String.IsNullOrEmpty(txtTitle.Text) || String.IsNullOrEmpty(txtDetails.Text);
+        }
         private void UpdateTask()
         {
+            if (CheckValues())
+            {
+                MessageBox.Show("Fill empty text boxes!");
+                return;
+            }
+
             try
             {
                 using (var connection = new SQLiteConnection(connectionString))
