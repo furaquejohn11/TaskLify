@@ -39,6 +39,7 @@ namespace TaskLify
         private void FormTodo_Load(object sender, EventArgs e)
         {
             LoadTask();
+            lblPage.Text = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(selectedMenu.ToLower()) + " Tasks";
         }
         private string SetQuery()
         {
@@ -155,8 +156,14 @@ namespace TaskLify
 
             }
         }
+        private DateTime ParseDate(string date)
+        {
+            return DateTime.ParseExact(date, "MM/dd/yyyy", new CultureInfo("en-US"), DateTimeStyles.None);
+        }
         private void LoadTaskList()
         {
+            taskList = taskList.OrderBy(task => ParseDate(task.date)).ToList();
+
             foreach (var tasks in taskList)
             {
                 GenerateTaskBlocks(tasks);
@@ -207,10 +214,11 @@ namespace TaskLify
 
             Label titleLabel = new Label()
             {
-                Text = tasks.title,
+                Text = TruncateText(tasks.title, 10),
                 Location = new Point(3, 5),
                 ForeColor = Color.White,
-                Font = new Font("Segoe UI Semibold", 14.25f, FontStyle.Bold)
+                Font = new Font("Segoe UI Semibold", 14.25f, FontStyle.Bold),
+                AutoSize = true,
             };
 
             Label dateLabel = new Label()
@@ -232,7 +240,7 @@ namespace TaskLify
 
             Label detailsLabel = new Label()
             {
-                Text = tasks.details,
+                Text = TruncateText(tasks.details, 260),
                 //Location = new Point(5, 5),
                 AutoSize = false,
                 Dock = DockStyle.Fill,
@@ -283,6 +291,18 @@ namespace TaskLify
                     return Color.Red;
                 default:
                     return Color.Yellow;
+            }
+        }
+        private string TruncateText(string text, int maxLength)
+        {
+            if (text.Length > maxLength)
+            {
+                // Truncate the text and add three dots
+                return text.Substring(0, maxLength - 3) + "...";
+            }
+            else
+            {
+                return text;
             }
         }
         private void btnAdd_Click(object sender, EventArgs e)
